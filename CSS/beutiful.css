@@ -1,0 +1,95 @@
+body {
+    background-image:url('bg_rp2.gif');
+   background-color:#b60934;
+   color:#c1b492;	
+   background-repeat: repeat;
+   line-height: 1.5;
+}  
+
+.huvuddiv {
+    text-align: center;
+}
+.switch{
+    display: flex;
+    flex-direction: column;
+    border: solid white 0.004px;
+    background-image: url('bg205.gif');
+    border-radius: 1% 100%;
+    background-repeat: repeat;
+    image-resolution: 1px 1px;
+    min-width: 25%;
+    max-width: 75%;
+    height: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: black 0px 5px 10px;
+    letter-spacing:20px;
+    image-rendering: pixelated;
+}
+.top{
+    background-color: #8f717191;
+    border: solid 0.00001cqb;
+    border-radius: 12% 5% 19% 11%;
+    background-image: url('bg_rp2.gif');
+    background-repeat: repeat;
+    min-width: auto;
+    max-width: 75%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    box-shadow: black 0px 5px 10px;
+    padding-top: 40px;
+    padding-bottom: 5%;
+    letter-spacing:2px;
+	image-rendering: pixelated;
+	-webkit-font-smoothing: none;
+}
+.left bottom{
+    display: inline;
+    justify-content: left;
+}
+.bottom{
+    background-color: #00000000;
+    background-image: url('bg205.gif');
+    background-repeat: repeat;
+    width: 75%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    box-shadow: black 0px 5px 10px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    letter-spacing:2px;
+	image-rendering:pixelated
+}
+/* button */
+ 
+nav div{
+    list-style: none;
+}
+nav div li{
+    margin: 12px 0px;
+}
+nav div li a{
+    color: #c1b492;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+}
+nav div li a::after{
+    content: "";
+    width: 0    ;
+    height: 4.5px;
+    background: #f94144;
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    transition: all 450ms;
+}
+nav div li a:hover::after{
+    width: 100%;
+}
