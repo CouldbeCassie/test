@@ -53,6 +53,8 @@ body {
 .bottom{
     background-color: #00000000;
     background-image: url('bg205.gif');
+    border: solid 0.001cqb;
+    border-radius: 12% 5% 19% 11%;
     background-repeat: repeat;
     width: 75%;
     height: auto;
