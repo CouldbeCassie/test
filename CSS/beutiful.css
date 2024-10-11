@@ -5,7 +5,7 @@ body {
    background-repeat: repeat;
    line-height: 1.5;
 }  
-//*Pusi*//
+/*pusi*/
 .huvuddiv {
     text-align: center;
 }
@@ -18,7 +18,7 @@ body {
     background-repeat: repeat;
     image-resolution: 1px 1px;
     min-width: 25%;
-    max-width: 95%; 
+    max-width: 95%;
     min-height: 50%;
     max-height: 100%;
     margin-left: auto;
@@ -85,7 +85,7 @@ nav div li a::after{
     content: "";
     width: 0    ;
     height: 4.5px;
-    background: #f94144;
+    background: #f941444e;
     position: absolute;
     bottom: -8px;
     left: 0;
