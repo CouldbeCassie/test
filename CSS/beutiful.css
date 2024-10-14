@@ -4,8 +4,9 @@ body {
    color:#c1b492;	
    background-repeat: repeat;
    line-height: 1.5;
+   text-align: center;
 }  
-/*pusi*/
+/*This is the design stuff*/
 .huvuddiv {
     text-align: center;
 }
@@ -33,9 +34,9 @@ body {
     border-radius: 12% 5% 19% 11%;
     background-image: url('bg_rp2.gif');
     background-repeat: repeat;
-    min-width: auto;
+    min-width: fit-content;
     max-width: 75%;
-    height: auto;
+    height: fit-content;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
@@ -56,7 +57,7 @@ body {
     border: solid 0.001cqb;
     border-radius: 12% 5% 19% 11%;
     background-repeat: repeat;
-    width: 75%;
+    width:fit-content;
     height: auto;
     margin-left: auto;
     margin-right: auto;
@@ -67,15 +68,15 @@ body {
     letter-spacing:2px;
 	image-rendering:pixelated
 }
-/* button */
- 
-nav div{
+/* button stuff bellow*/
+/*Homepagebuttons*/ 
+.wrapper nav div{
     list-style: none;
 }
-nav div li{
+.wrapper nav div li{
     margin: 12px 0px;
 }
-nav div li a{
+.wrapper nav div li a{
     color: #c1b492;
     font-family: "Roboto", sans-serif;
     font-size: 20px;
@@ -83,7 +84,7 @@ nav div li a{
     text-transform: uppercase;
     position: relative;
 }
-nav div li a::after{
+.wrapper nav div li a::after{
     content: "";
     width: 0    ;
     height: 4.5px;
@@ -93,6 +94,75 @@ nav div li a::after{
     left: 0;
     transition: all 450ms;
 }
-nav div li a:hover::after{
+.wrapper nav div li a:hover::after{
     width: 100%;
 }
+/*back button*/
+/*Cod nav*/
+.flex-container {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-evenly;
+    flex-wrap: inherit;
+    flex-direction: row;
+  }
+  
+  .flex-item {
+    display: flex;
+    flex-direction: column;  /* Stack items vertically */
+    align-items: center;
+    text-transform: uppercase;
+    margin-right: 12px; /* Adjust spacing as needed */
+  }
+  
+  .flex-item a {
+    color: #c1b492;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    word-spacing: 5px;
+    margin: auto;
+  }
+  
+  .flex-item img {
+    margin-top: 10px; /* Adjust spacing as needed */
+  }
+  
+  .flex-item a:hover::after {
+    width: 100%;
+  }
+  
+  .highlight nav {
+    list-style: none;
+  }
+  
+  .highlight nav ul {
+    margin: 12px 0px;
+  }
+  
+  .highlight nav ul li a {
+    color: #c1b492;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+  }
+  
+  .highlight nav ul li a::after {
+    content: "";
+    width: 0;
+    height: 50px;
+    background: #f941444e;
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    transition: all 450ms;
+  }
+  
+  .highlight nav ul li a:hover::after {
+    width: 100%;
+  }
+  
