@@ -5,6 +5,10 @@ body {
     max-width: 100%;
     height: fit-content;
 }
+.penis2{
+    max-width: 100%;
+    min-width: auto;
+}
 .logoncompanyname {  
 background-color: #fccc00;
 min-width: 25%;
