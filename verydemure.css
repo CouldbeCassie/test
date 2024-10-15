@@ -17,8 +17,9 @@ max-width: fit-content;
 
 .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(211, 1, 1);
     width: inherit;
+    font-size: small;
 }
 
 .topnav a {
@@ -38,7 +39,7 @@ max-width: fit-content;
 
 .topnav a:target,
 .topnav a.active {
-    background-color: red;
+    background-color: rgba(232, 144, 3, 0.799);
     color: white;
 }
 
@@ -46,14 +47,13 @@ max-width: fit-content;
     float: left;
     overflow: hidden;
     width: fit-content;
+    font-size: small;
 }
 
 .dropdown .dropbtn {
-    font-size: 16px;
     border: none;
     outline: none;
     color: white;
-    padding: 14px 16px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
@@ -61,11 +61,12 @@ max-width: fit-content;
 
 .dropdown-content {
     display: none;
+    font-weight: bold;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    font-size: small;
 }
 
 .dropdown-content a {
