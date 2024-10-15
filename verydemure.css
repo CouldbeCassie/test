@@ -9,11 +9,6 @@ body {
     max-width: 100%;
     min-width: auto;
 }
-.logoncompanyname {  
-background-color: #fccc00;
-min-width: 25%;
-max-width: fit-content;
-}
 .putmeontheleft{
     text-align: left;
     padding-left: 15px;
