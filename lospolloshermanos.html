@@ -12,38 +12,25 @@
         <div class="logoncompanyname">
             <a href="lospolloshermanos.html" id="home"><img src="Images/Body/headerlogo.png" alt="logo" width="100%" height="auto"></a>
         </div>
-        <nav class="topnav">
-
+        <nav class="topnav" id="myTopnav">
             <a href="#home" id="home" class="red-button">Home</a>
-
             <a href="#about" id="about">About</a>
-
             <a href="link.html">Staff films</a>
-
             <div class="dropdown">
-                <a class="dropbtn menu">Menu</a>
-
-                <div class="dropdown-content">
-
-                    <a href="#hotitems" id="hotitems">Popular Items</a>
-
-                    <a href="#discounts" id="discounts">Discounts</a>
-
-                    <a href="#kidsmenu" id="kidsmenu">Kids Menu</a>
-
-                    <a href="#newitems" id="newitems">New Items</a>
-
-                    <a href="#veganmenu" id="veganmenu">Vegan Menu</a>
-
-                </div>
-
+              <a class="dropbtn menu">Menu</a>
+              <div class="dropdown-content">
+                <a href="#hotitems" id="hotitems">Popular Items</a>
+                <a href="#discounts" id="discounts">Discounts</a>
+                <a href="#kidsmenu" id="kidsmenu">Kids Menu</a>
+                <a href="#newitems" id="newitems">New Items</a>
+                <a href="#veganmenu" id="veganmenu">Vegan Menu</a>
+              </div>
             </div>
-
             <a href="#howtofindus" id="howtofindus">How To Find Us</a>
-
             <a href="#contactus" id="contactus">Contact Us</a>
-
-        </nav>
+            <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">&#9776;</a>
+          </nav>
+          
    </div>
 
         <div class="center">    
@@ -299,6 +286,16 @@ document.querySelectorAll('.topnav a').forEach(button => {
 document.querySelector('.topnav a[href="#home"]').classList.add('active');
 showContent('home-content');
 });
+
+function toggleMenu() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
         </script>
     </body>
     </html>
