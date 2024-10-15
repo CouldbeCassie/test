@@ -17,7 +17,6 @@ body {
     overflow: hidden;
     background-color: rgb(211, 1, 1);
     width: inherit;
-    font-size: small;
   }
   
   .topnav a {
@@ -63,7 +62,6 @@ body {
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    font-size: small;
   }
   
   .dropdown-content a {
