@@ -1,12 +1,14 @@
 body {
     font-family: 'Sarabun', sans-serif;
     line-height: 1.5;
-    width: fit-content;
+    min-width: 25%;
+    max-width: fit-content;
     height: fit-content;
 }
-
 .logoncompanyname {  
 background-color: #fccc00;
+min-width: 25%;
+max-width: fit-content;
 }
 .putmeontheleft{
     text-align: left;
@@ -16,6 +18,7 @@ background-color: #fccc00;
 .topnav {
     overflow: hidden;
     background-color: #333;
+    width: inherit;
 }
 
 .topnav a {
@@ -25,6 +28,7 @@ background-color: #fccc00;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    width: fit-content;
 }
 
 .topnav a:hover {
@@ -41,6 +45,7 @@ background-color: #fccc00;
 .dropdown {
     float: left;
     overflow: hidden;
+    width: fit-content;
 }
 
 .dropdown .dropbtn {
@@ -85,8 +90,8 @@ background-color: #fccc00;
 }
 
 .pic{
-width: auto;
-height: auto;
+width: 100%;
+height: 100%;
 }
 .center{
     text-align: center;
@@ -94,6 +99,8 @@ height: auto;
     background-size: cover;
     padding-top: 5%;
     padding-bottom: 5%;
+    max-width: 100%;
+    min-width: fit-content;
 }
 
 .centertext{
@@ -133,7 +140,7 @@ height: auto;
 }
 /* side scroll */
 .outer {
-    height: 200px;
+    height: fit-content;
     white-space: nowrap;
     position: relative;
     overflow-x: scroll;
@@ -145,7 +152,7 @@ height: auto;
 
 
 .outer div {
-    width: 11.5%;
+    width: fit-content;
     float: none;
     background-color: #dddddd61;
     border: solid 4px rgba(239, 103, 6, 0.356);
@@ -198,13 +205,13 @@ h2 {
 }
 @media screen and (min-width: 800px){
     .good-done-right video {
-     max-height: 400px;
+     max-height: fit-content;
     }
 }
 
 @media screen and (max-width: 800px){
     .good-done-right video{
-     max-height: 400px;
+     max-height: fit-content;
      margin-left: 15%;
     }
 }
@@ -277,13 +284,13 @@ body{
 }
 @media screen and (min-width: 450px){
     .good-done-right img {
-     max-height: 400px;
+     max-height: fit-content;
     }
 }
 
 @media screen and (max-width: 449px){
     .good-done-right img {
-     max-height: 200px;
+     max-height: fit-content;
      margin-left: 15%;
     }
 }
@@ -344,13 +351,13 @@ body{
 }
 @media screen and (min-width: 450px){
     .winkwink img {
-     max-height: 400px;
+     max-height: fit-content;
     }
 }
 
 @media screen and (max-width: 449px){
     .winkwink img {
-     max-height: 200px;
+     max-height: fit-content;
      margin-left: 15%;
     }
 }
@@ -383,13 +390,13 @@ body{
 }
 @media screen and (min-width: 800px){
     .iwan video {
-     max-height: 400px;
+     max-height: fit-content;
     }
 }
 
 @media screen and (max-width: 800px){
     .iwan video{
-     max-height: 400px;
+     max-height: fit-content;
      margin-left: 15%;
     }
 }
@@ -399,4 +406,5 @@ body{
     border-radius: 15% 15% 0% 0%;
     border: solid 10px #fccc00;
     margin: 10% 0%;
+    width: auto;
 }
