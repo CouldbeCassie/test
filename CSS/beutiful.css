@@ -4,11 +4,22 @@ body {
    color:#c1b492;	
    background-repeat: repeat;
    line-height: 1.5;
-   text-align: center;
 }  
+.left2{
+  justify-content: left;
+  text-align:start
+}
 /*This is the design stuff*/
-.huvuddiv {
+.huvuddiv div{
     text-align: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+a{
+  text-decoration: none;
+  list-style: none;
+  color: #c1b492;
 }
 .switch{
     display: flex;
@@ -22,8 +33,6 @@ body {
     max-width: 95%;
     min-height: 50%;
     max-height: 100%;
-    margin-left: auto;
-    margin-right: auto;
     box-shadow: black 0px 5px 10px;
     letter-spacing:20px;
     image-rendering: pixelated;
@@ -40,8 +49,6 @@ body {
     max-width: 95%;
     min-height: 50%;
     max-height: 100%;
-    margin-left: auto;
-    margin-right: auto;
     box-shadow: black 0px 5px 10px;
     letter-spacing:20px;
     image-rendering: pixelated;
@@ -55,8 +62,6 @@ body {
     min-width: fit-content;
     max-width: 75%;
     height: fit-content;
-    margin-left: auto;
-    margin-right: auto;
     margin-top: 40px;
     box-shadow: black 0px 5px 10px;
     padding-top: 40px;
@@ -77,8 +82,6 @@ body {
     background-repeat: repeat;
     width: fit-content;
     height: auto;
-    margin-left: auto;
-    margin-right: auto;
     margin-top: 5%;
     box-shadow: black 0px 5px 10px;
     padding-top: 15px;
@@ -123,7 +126,6 @@ body {
     padding: 0;
     margin: 0;
     justify-content: space-evenly;
-    flex-wrap: inherit;
     flex-direction: row;
   }
   
@@ -172,15 +174,15 @@ body {
   .highlight nav ul li a::after {
     content: "";
     width: 0;
-    height: 50px;
+    height: 0;
     background: #f941444e;
     position: absolute;
     bottom: -8px;
     left: 0;
-    transition: all 450ms;
+    transition: all 525ms;
   }
   
   .highlight nav ul li a:hover::after {
-    width: 100%;
+    height: 100%;
   }
   
