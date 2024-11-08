@@ -76,8 +76,11 @@ a {
 }
 
 /* Navigation links */
-.wrapper nav div {
+.wrapper li{
   list-style: none;
+  text-transform: uppercase;
+  font-size: 20px;
+  position: relative;
 }
 
 .wrapper nav div li {
@@ -87,20 +90,17 @@ a {
 .wrapper nav div li a {
   color: #c1b492;
   font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  text-transform: uppercase;
-  position: relative;
 }
 
 .wrapper nav div li a::after {
   content: "";
   width: 0;
   height: 0;
-  background: #f941444e;
+  background: #ff0206;
   position: absolute;
   bottom: -8px;
   left: 0;
-  transition: all 450ms;
+  transition: all 45ms;
 }
 
 .wrapper nav div li a:hover::after {
