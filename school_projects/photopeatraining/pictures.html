@@ -1,10 +1,46 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <title>Home</title>
+    <title>Photopea Before and After</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/CSS/beutiful.css">
     <link rel="icon" type="image/x-icon" href="favicon_16px.png">
+    <style>
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .image-wrapper img {
+            width: 100%;
+            display: block;
+        }
+        .image-wrapper img.after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;  /* Hide the after image initially */
+            transition: opacity 0.5s ease;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .button-container button {
+            margin: 0 10px;
+            padding: 5px 10px;
+            background-color: #c1b492;
+            color: #b60934;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="huvuddiv">
@@ -20,54 +56,60 @@
             </div>
         </div>
         <br><br>
-        <div class="switch">
-            <h1>Before</h1>
-        </div>
-        <div class="top">
-            <div class="bottom">
-                <div class="top">
-                    <h5>Monkey</h5>
-                    <img src="Apa.png" width="100%" height="50%">
-                </div>
-                <div class="top">
-                    <h5>Mona Lisa</h5>
-                    <img src="/school_projects/photopeatraining/Mona_Lisa.jpg" width="100%" height="50%">
-                </div>
-                <div class="top">
-                    <h5>Leaf</h5>
-                    <img src="Loev2.png" width="100%">
-                </div>
-                <div class="top">
-                    <h5>Costa del mucho</h5>
-                    <img src="/school_projects/photopeatraining/Costa_del_mucho.jpg" width="100%" height="50%">
-                </div>
+        <div class="top container">
+            <h5>Monkey</h5>
+            <div class="image-wrapper">
+                <img src="Apa.png" class="before" id="monkey-before">
+                <img src="/school_projects/photopeatraining/monkey.png" class="after" id="monkey-after">
+            </div>
+            <div class="button-container">
+                <button onclick="toggleImage('monkey-before', 'monkey-after')">Toggle</button>
             </div>
         </div>
-        <div class="top">
-            <div class="switch">
-                <h1>After</h1>
+        <div class="top container">
+            <h5>Mona Lisa</h5>
+            <div class="image-wrapper">
+                <img src="/school_projects/photopeatraining/Mona_Lisa.jpg" class="before" id="mona-before">
+                <img src="/school_projects/photopeatraining/Mona_Lisaafter.png" class="after" id="mona-after">
             </div>
-            <div class="top">
-                <div class="bottom">
-                    <div class="top">
-                        <h5>Monkey</h5>
-                        <img src="/school_projects/photopeatraining/monkey.png" width="100%" height="50%">
-                    </div>
-                    <div class="top">
-                        <h3>Mona Lisa</h3>
-                        <img src="/school_projects/photopeatraining/Mona_Lisaafter.png" width="100%" height="50%">
-                    </div>
-                    <div class="top">
-                        <h5>Leaf</h5>
-                        <img src="Loev.png" width="100%">
-                    </div>
-                    <div class="top">
-                        <h5>Costa del mucho</h5>
-                        <img src="/school_projects/photopeatraining/Costa_del_mucho (1).jpg" width="100%" height="50%">
-                    </div>
-                </div>
+            <div class="button-container">
+                <button onclick="toggleImage('mona-before', 'mona-after')">Toggle</button>
+            </div>
+        </div>
+        <div class="top container">
+            <h5>Leaf</h5>
+            <div class="image-wrapper">
+                <img src="Loev2.png" class="before" id="leaf-before">
+                <img src="Loev.png" class="after" id="leaf-after">
+            </div>
+            <div class="button-container">
+                <button onclick="toggleImage('leaf-before', 'leaf-after')">Toggle</button>
+            </div>
+        </div>
+        <div class="top container">
+            <h5>Costa del mucho</h5>
+            <div class="image-wrapper">
+                <img src="/school_projects/photopeatraining/Costa_del_mucho.jpg" class="before" id="costa-before">
+                <img src="/school_projects/photopeatraining/Costa_del_mucho (1).jpg" class="after" id="costa-after">
+            </div>
+            <div class="button-container">
+                <button onclick="toggleImage('costa-before', 'costa-after')">Toggle</button>
             </div>
         </div>
     </div>
+    <script>
+        function toggleImage(beforeId, afterId) {
+            var beforeImage = document.getElementById(beforeId);
+            var afterImage = document.getElementById(afterId);
+
+            if (afterImage.style.opacity === "0") {
+                afterImage.style.opacity = "1";
+                beforeImage.style.opacity = "0";
+            } else {
+                afterImage.style.opacity = "0";
+                beforeImage.style.opacity = "1";
+            }
+        }
+    </script>
 </body>
 </html>
