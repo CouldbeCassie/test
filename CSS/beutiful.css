@@ -73,8 +73,42 @@ a {
   box-shadow: black 0px 5px 10px;
   letter-spacing: 2px;
   image-rendering: pixelated;
-}
 
+}
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.image-wrapper img {
+  width: 100%;
+  display: block;
+}
+.image-wrapper img.after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;  /* Hide the after image initially */
+  transition: opacity 0.5s ease;
+}
+.button-container {
+  text-align: center;
+  margin-top: 10px;
+}
+.button-container button {
+  margin: 0 10px;
+  padding: 5px 10px;
+  background-color: #c1b492;
+  color: #b60934;
+  border: none;
+  cursor: pointer;
+}
 /* Navigation links */
 .wrapper li{
   list-style: none;
