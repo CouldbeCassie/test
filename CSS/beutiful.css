@@ -2,17 +2,16 @@ body {
   background: url('bg_rp2.gif') repeat #b60934;
   color: #c1b492;
   line-height: 1.5;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
-.left2 {
-  justify-content: left;
-  text-align: start;
-}
-
-/* Centering content within huvuddiv */
-.huvuddiv div {
+.flexiplex {
+  display: flex;
   text-align: center;
-  margin: 0 auto;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
 }
 
 a {
@@ -27,7 +26,7 @@ a {
   border: solid white 0.004px;
   background: url('bg205.gif') repeat;
   box-shadow: black 0px 5px 10px;
-  letter-spacing: 20px;
+  letter-spacing: 1px;
   image-rendering: pixelated;
 }
 
@@ -54,12 +53,13 @@ a {
   border-radius: 12% 12% 12% 12%;
   min-width: fit-content;
   max-width: 75%;
-  margin-top: 40px;
-  padding: 40px 0 5%;
+  margin: 40px auto;
+  padding: 40px 20px;
   box-shadow: black 0px 5px 10px;
   letter-spacing: 2px;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
+  text-align: center;
 }
 
 /* Bottom container */
@@ -68,39 +68,44 @@ a {
   border: solid 0.001cqb;
   border-radius: 12% 12% 12% 12%;
   width: fit-content;
-  margin-top: 5%;
-  padding: 15px 0 5px;
+  margin: 5% auto;
+  padding: 15px 20px;
   box-shadow: black 0px 5px 10px;
   letter-spacing: 2px;
   image-rendering: pixelated;
-
 }
+
 .container {
   position: relative;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
+
 .image-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
+
 .image-wrapper img {
   width: 100%;
   display: block;
 }
+
 .image-wrapper img.after {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0;  /* Hide the after image initially */
+  opacity: 0;
   transition: opacity 0.5s ease;
 }
+
 .button-container {
   text-align: center;
   margin-top: 10px;
 }
+
 .button-container button {
   margin: 0 10px;
   padding: 5px 10px;
@@ -109,8 +114,9 @@ a {
   border: none;
   cursor: pointer;
 }
+
 /* Navigation links */
-.wrapper li{
+.wrapper li {
   list-style: none;
   text-transform: uppercase;
   font-size: 20px;
@@ -204,4 +210,9 @@ a {
 
 .highlight nav ul li a:hover::after {
   height: 100%;
+}
+.flexi{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
