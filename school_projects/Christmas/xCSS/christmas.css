@@ -1,0 +1,61 @@
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    color: #2e4057; /* dark slate blue */
+}
+
+body {
+    background: url('/school_projects/Christmas/bgxmas.jpg') repeat;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+
+h3 {
+    font-size: 2em;
+    margin-top: 50px;
+    color: #d63333; /* red */
+}
+
+.particle {
+    position: absolute;
+    width: 30px; /* Adjust size as needed */
+    height: 30px;
+    pointer-events: none; /* Ensure they don't interfere with mouse events */
+    opacity: 1; /* Initial opacity */
+    animation: fall 6s linear, fade 4s linear, drift 6s ease-in-out infinite; /* Removed rotate animation */
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(1vh); /* Ensures particles fall down the full height of the viewport */
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes drift {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(50px); /* Adjust the horizontal drift range */
+    }
+    100% {
+        transform: translateY(-50px); /* Adjust the horizontal drift range */
+    }
+}
