@@ -23,11 +23,11 @@ h3 {
 
 .particle {
     position: absolute;
-    width: 30px; /* Adjust size as needed */
-    height: 30px;
+    width: 25px; /* Adjust size as needed */
+    height: 25px;
     pointer-events: none; /* Ensure they don't interfere with mouse events */
     opacity: 1; /* Initial opacity */
-    animation: fall 6s linear, fade 4s linear, drift 6s ease-in-out infinite; /* Removed rotate animation */
+    animation: fall 5s linear, fade 4s linear, drift 6s ease-in-out infinite; /* Removed rotate animation */
 }
 
 @keyframes fall {
@@ -35,7 +35,7 @@ h3 {
         transform: translateY(0);
     }
     100% {
-        transform: translateY(1vh); /* Ensures particles fall down the full height of the viewport */
+        transform: translateY(100vh); /* Ensures particles fall down the full height of the viewport */
     }
 }
 
