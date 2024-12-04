@@ -12,9 +12,13 @@ body {
     background: url('/school_projects/Christmas/bgxmas.jpg') repeat;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    user-select: none;
   }
   
-
+.img{
+    user-select: none;
+    pointer-events: none;
+}
 .text {
     font-size: 2em;
     text-transform: uppercase;
