@@ -15,8 +15,10 @@ body {
   }
   
 
-h3 {
+.text {
     font-size: 2em;
+    text-transform: uppercase;
+    font-weight: bolder;
     margin-top: 50px;
     color: #d63333; /* red */
 }

@@ -2,7 +2,7 @@ let lastTime = 0;
 
 document.addEventListener('mousemove', (event) => {
     let currentTime = new Date().getTime();
-    if (currentTime - lastTime > 40) { // Create particles at an interval of 100ms
+    if (currentTime - lastTime > 100) { // Create particles at an interval of 100ms
         let x = event.clientX;
         let y = event.clientY;
         
@@ -10,6 +10,20 @@ document.addEventListener('mousemove', (event) => {
         lastTime = currentTime;
     }
 });
+
+document.addEventListener('contextmenu', (event) => {
+    event.preventDefault(); // Prevent the default context menu
+    let x = event.clientX;
+    let y = event.clientY;
+    
+    createSnowExplosion(x, y);
+});
+
+function createSnowExplosion(x, y) {
+    for (let i = 0; i < 20; i++) { // Number of particles in the explosion
+        createParticle(x, y);
+    }
+}
 
 function createParticle(x, y) {
     // Array of image paths
