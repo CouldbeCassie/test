@@ -4,6 +4,11 @@ body {
   line-height: 1.5;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure body takes full height */
 }
 
 .flexiplex {
@@ -26,7 +31,7 @@ a {
   flex-direction: column;
   border: solid white 0.004px;
   background: url('bg205.gif') repeat;
-  box-shadow: black 0px 5px 10px;
+  box-shadow: 0 5px 10px black;
   letter-spacing: 1px;
   image-rendering: pixelated;
 }
@@ -51,11 +56,11 @@ a {
 .top {
   background: rgba(143, 113, 113, 0.57) url('bg_rp2.gif') repeat;
   border: solid 0.00001cqb;
-  border-radius: 12% 12% 12% 12%;
+  border-radius: 12%;
   width: fit-content;
   margin: 0 auto;
   padding: 40px 20px;
-  box-shadow: black 0px 5px 10px;
+  box-shadow: 0 5px 10px black;
   letter-spacing: 2px;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
@@ -66,11 +71,11 @@ a {
 .bottom {
   background: transparent url('bg205.gif') repeat;
   border: solid 0.001cqb;
-  border-radius: 15% 15% 15% 15%;
+  border-radius: 15%;
   width: fit-content;
   margin: 5% auto;
   padding: 15px 20px;
-  box-shadow: black 0px 5px 10px;
+  box-shadow: 0 5px 10px black;
   letter-spacing: 2px;
   image-rendering: pixelated;
 }
@@ -113,6 +118,13 @@ a {
   color: #b60934;
   border: none;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Button Hover Effects */
+.button-container button:hover {
+  background-color: #b60934;
+  color: #c1b492;
 }
 
 /* Navigation links */
@@ -140,7 +152,7 @@ a {
   position: absolute;
   bottom: -8px;
   left: 0;
-  transition: all 45ms;
+  transition: all 0.45s;
 }
 
 .wrapper nav div li a:hover::after {
@@ -180,39 +192,23 @@ a {
   width: 100%;
 }
 
-/* Highlight navigation */
-.highlight nav {
-  list-style: none;
-}
-
-.highlight nav ul {
-  margin: 12px 0;
-}
-
-.highlight nav ul li a {
-  color: #c1b492;
-  font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  text-transform: uppercase;
-  position: relative;
-}
-
-.highlight nav ul li a::after {
-  content: "";
-  width: 0;
-  height: 0;
-  background: #f941444e;
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  transition: all 525ms;
-}
-
 .highlight nav ul li a:hover::after {
   height: 100%;
 }
-.flexi{
+
+.flexi {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .flex-container {
+      flex-direction: column;
+  }
+  .flex-item {
+      margin-right: 0;
+      margin-bottom: 12px;
+  }
 }
