@@ -1,23 +1,16 @@
+/* General Styles */
 body {
   background: url('bg_rp2.gif') repeat #b60934;
   color: #c1b492;
-  line-height: 1.5;
+  line-height: 1;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh; /* Ensure body takes full height */
-}
-
-.flexiplex {
-  display: flex;
-  width: 100%;
+  min-height: 100vh;
   text-align: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
 }
 
 a {
@@ -25,61 +18,72 @@ a {
   color: #c1b492;
 }
 
-/* Switch styles */
+/* Flexiplex Container */
+.flexiplex {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* Switch Styles */
 .switch, .switch2 {
   display: flex;
   flex-direction: column;
   border: solid white 0.004px;
   background: url('bg205.gif') repeat;
-  box-shadow: 0 5px 10px black;
+  box-shadow: 0 5px 20px rgb(154, 32, 32);
   letter-spacing: 1px;
   image-rendering: pixelated;
+  align-items: center;
+  width: 80%; /* Adjust width for consistency */
+  margin: 20px; /* Add margin for spacing */
 }
 
 .switch {
   border-radius: 1% 100%;
-  min-width: 25%;
-  max-width: 95%;
   min-height: 50%;
   max-height: 100%;
 }
 
 .switch2 {
   border-radius: 54% 100% 60%;
-  min-width: 25%;
-  max-width: 95%;
   min-height: 50%;
   max-height: 100%;
 }
 
-/* Top container */
+/* Top Container */
 .top {
   background: rgba(143, 113, 113, 0.57) url('bg_rp2.gif') repeat;
   border: solid 0.00001cqb;
   border-radius: 12%;
-  width: fit-content;
-  margin: 0 auto;
+  width: 80%;
+  margin: 20px auto;
   padding: 40px 20px;
-  box-shadow: 0 5px 10px black;
+  box-shadow: 0 5px 15px;
   letter-spacing: 2px;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
-  text-align: center;
 }
 
-/* Bottom container */
+/* Bottom Container */
 .bottom {
   background: transparent url('bg205.gif') repeat;
   border: solid 0.001cqb;
   border-radius: 15%;
-  width: fit-content;
-  margin: 5% auto;
-  padding: 15px 20px;
-  box-shadow: 0 5px 10px black;
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 2.5px 12px;
   letter-spacing: 2px;
   image-rendering: pixelated;
+  text-align: center;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
+/* Image Container */
 .container {
   position: relative;
   width: 100%;
@@ -106,6 +110,7 @@ a {
   transition: opacity 0.5s ease;
 }
 
+/* Button Container */
 .button-container {
   text-align: center;
   margin-top: 10px;
@@ -113,12 +118,13 @@ a {
 
 .button-container button {
   margin: 0 10px;
-  padding: 5px 10px;
+  padding: 10px 20px;
   background-color: #c1b492;
   color: #b60934;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px; /* Added border-radius for style */
 }
 
 /* Button Hover Effects */
@@ -127,7 +133,7 @@ a {
   color: #c1b492;
 }
 
-/* Navigation links */
+/* Navigation Links */
 .wrapper li {
   list-style: none;
   text-transform: uppercase;
@@ -159,13 +165,14 @@ a {
   height: 100%;
 }
 
-/* Flex container and items */
+/* Flex Container and Items */
 .flex-container {
   display: flex;
   padding: 0;
   margin: 0;
   justify-content: space-evenly;
   flex-direction: row;
+  align-items: center;
 }
 
 .flex-item {
@@ -200,15 +207,31 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
+  body {
+      font-size: 14px;
+      padding: 10px;
+  }
+
   .flex-container {
       flex-direction: column;
   }
+
   .flex-item {
       margin-right: 0;
       margin-bottom: 12px;
+  }
+
+  .top, .bottom, .switch, .switch2 {
+      width: 90%; /* Adjust width for smaller screens */
+      padding: 20px 10px;
+  }
+
+  .button-container button {
+      padding: 10px 20px;
   }
 }
