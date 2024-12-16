@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5">
+    <title>Quitter</title>
+    <link rel="stylesheet" href="RNGgpus.css">
+    <script src="/homemade/login.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <img src="/CSS/come.png" alt="Logo">
+            <h1>Quitter</h1>
+            <p>Connect and quit with us.</p>
+        </div>
+        <div class="right-panel">
+            <div class="form-container">
+                <form id="login-form" class="form">
+                    <h2>Welcome Back</h2>
+                    <input type="text" class="input-field" placeholder="Username" id="login-username" maxlength="8" required>
+                    <p id="login-username-error" class="error-message"></p>
+                    <input type="password" class="input-field" placeholder="Password" id="login-password" maxlength="8" required>
+                    <p id="login-password-error" class="error-message"></p>
+                    <button type="submit" class="submit-btn">Login</button>
+                    <p class="form-footer">New here? <a href="#" onclick="switchForm('register')">Create an account</a></p>
+                </form>
+                <form id="register-form" class="form hidden">
+                    <h2>Create Account</h2>
+                    <input type="text" class="input-field" placeholder="Username" id="register-username" maxlength="8" required>
+                    <p id="register-username-error" class="error-message"></p>
+                    <input type="password" class="input-field" placeholder="Password" id="register-password" maxlength="8" required>
+                    <p id="register-password-error" class="error-message"></p>
+                    <button type="submit" class="submit-btn">Register</button>
+                    <p class="form-footer">Already have an account? <a href="#" onclick="switchForm('login')">Sign in</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="cookie-popup" class="cookie-popup">
+        <p>We use cookies to improve your experience. By using our site, you agree to our <a href="#">Cookie Policy</a>.</p>
+        <button id="accept-cookies">Accept</button>
+    </div>
+</body>
+</html>
