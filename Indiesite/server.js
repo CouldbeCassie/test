@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = 3000;
 
-const jwtSecret = 'peepeepoopoo';
+const jwtSecret = 'your_secret_key';
 
 mongoose.connect('mongodb://localhost:27017/socialmedia', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -26,56 +26,36 @@ const postSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 const Post = mongoose.model('Post', postSchema);
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the Social Media App!');
-});
-
 app.post('/register', async (req, res) => {
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  const user = new User({
-    username: req.body.username,
-    password: hashedPassword
-  });
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).send('Username and password are required');
+  }
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.status(400).send('Username already exists');
+  }
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = new User({ username, password: hashedPassword });
   await user.save();
-  res.send('User registered!');
+  res.status(201).send('User registered!');
 });
 
 app.post('/login', async (req, res) => {
-  const user = await User.findOne({ username: req.body.username });
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).send('Username and password are required');
+  }
+  const user = await User.findOne({ username });
   if (!user) {
     return res.status(400).send('User not found');
   }
-  const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
     return res.status(400).send('Invalid password');
   }
   const token = jwt.sign({ userId: user._id }, jwtSecret);
   res.send({ token });
-});
-
-app.post('/posts', async (req, res) => {
-  const post = new Post({
-    content: req.body.content,
-    likes: 0
-  });
-  await post.save();
-  res.status(201).json(post);
-});
-
-app.get('/posts', async (req, res) => {
-  const posts = await Post.find();
-  res.json(posts);
-});
-
-app.post('/posts/:id/like', async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (post) {
-    post.likes++;
-    await post.save();
-    res.json(post);
-  } else {
-    res.status(404).send('Post not found');
-  }
 });
 
 app.listen(port, () => {

@@ -17,7 +17,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
   const username = document.getElementById('register-username').value;
   const password = document.getElementById('register-password').value;
 
-  const response = await fetch('https://cassaint.com/register', {
+  const response = await fetch('/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
@@ -37,7 +37,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   const username = document.getElementById('login-username').value;
   const password = document.getElementById('login-password').value;
 
-  const response = await fetch('https://cassaint.com/login', {
+  const response = await fetch('/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
@@ -57,6 +57,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 document.getElementById('theme-button').addEventListener('click', function() {
   document.body.classList.toggle('dark-mode');
 
+  // Toggle data-theme attribute on body
   if (document.body.classList.contains('dark-mode')) {
     document.documentElement.setAttribute('data-theme', 'dark');
     document.getElementById('theme-icon').classList.replace('fa-sun', 'fa-moon');
