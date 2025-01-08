@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = 3000;
 
-const jwtSecret = 'your_secret_key';
+const jwtSecret = 'peepeepoopoo';
 
 mongoose.connect('mongodb://localhost:27017/socialmedia', { useNewUrlParser: true, useUnifiedTopology: true });
 
