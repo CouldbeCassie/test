@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="feed.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome, <span id="profile-name-display"></span>!</h1>
+        <button id="theme-button">
+            <i id="theme-icon" class="fa fa-sun"></i> Toggle Dark Mode
+        </button>
+        <input type="text" id="profile-name" placeholder="Enter your profile name">
+    </header>
+
+    <main>
+        <!-- Create Post Form -->
+        <div id="create-post-form">
+            <h2>Create Post</h2>
+            <form>
+                <label for="post-content">Content:</label>
+                <textarea id="post-content" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+
+        <!-- Posts Section -->
+        <div id="posts-section">
+            <h2>Posts</h2>
+            <div id="posts-container"></div>
+        </div>
+    </main>
+</body>
+</html>

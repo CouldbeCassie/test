@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = 3000;
 
-// Replace with your own secret key
 const jwtSecret = 'your_secret_key';
 
 mongoose.connect('mongodb://localhost:27017/socialmedia', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -19,7 +18,13 @@ const userSchema = new mongoose.Schema({
   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
 });
 
+const postSchema = new mongoose.Schema({
+  content: String,
+  likes: Number
+});
+
 const User = mongoose.model('User', userSchema);
+const Post = mongoose.model('Post', postSchema);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Social Media App!');
@@ -46,6 +51,31 @@ app.post('/login', async (req, res) => {
   }
   const token = jwt.sign({ userId: user._id }, jwtSecret);
   res.send({ token });
+});
+
+app.post('/posts', async (req, res) => {
+  const post = new Post({
+    content: req.body.content,
+    likes: 0
+  });
+  await post.save();
+  res.status(201).json(post);
+});
+
+app.get('/posts', async (req, res) => {
+  const posts = await Post.find();
+  res.json(posts);
+});
+
+app.post('/posts/:id/like', async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (post) {
+    post.likes++;
+    await post.save();
+    res.json(post);
+  } else {
+    res.status(404).send('Post not found');
+  }
 });
 
 app.listen(port, () => {
