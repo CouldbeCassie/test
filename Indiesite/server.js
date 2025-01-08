@@ -12,52 +12,26 @@ mongoose.connect('mongodb://localhost:27017/socialmedia', { useNewUrlParser: tru
 
 app.use(bodyParser.json());
 
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
-});
-
-const postSchema = new mongoose.Schema({
-  content: String,
-  likes: Number
-});
-
-const User = mongoose.model('User', userSchema);
-const Post = mongoose.model('Post', postSchema);
-
-app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    return res.status(400).send('Username and password are required');
-  }
-  const existingUser = await User.findOne({ username });
-  if (existingUser) {
-    return res.status(400).send('Username already exists');
-  }
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({ username, password: hashedPassword });
-  await user.save();
-  res.status(201).send('User registered!');
-});
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/posts', require('./routes/posts'));
 
 app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    return res.status(400).send('Username and password are required');
-  }
-  const user = await User.findOne({ username });
-  if (!user) {
-    return res.status(400).send('User not found');
-  }
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) {
-    return res.status(400).send('Invalid password');
-  }
-  const token = jwt.sign({ userId: user._id }, jwtSecret);
-  res.send({ token });
+    const { username, password } = req.body;
+    if (!username || !password) {
+        return res.status(400).send('Username and password are required');
+    }
+    const user = await User.findOne({ username });
+    if (!user) {
+        return res.status(400).send('User not found');
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+        return res.status(400).send('Invalid password');
+    }
+    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
+    res.send({ token });
 });
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+    console.log(`Server running at http://localhost:${port}/`);
 });
