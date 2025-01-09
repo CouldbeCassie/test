@@ -6,14 +6,49 @@
     --input-background-light: #ffffff;
     --primary-color-light: #f6d1a8;
     --secondary-color-light: #a17979;
-
-    --background-dark: #272727;
-    --text-dark: #ffffff;
+}
+[data-theme="dark"] {
+    --background-dark: #1e1d1d;
+    --text-dark: #f5f8fa;
     --header-background-dark: #0c0c0c;
-    --form-background-dark: #1c1a1a;
-    --input-background-dark: #888888;
-    --primary-color-dark: #353d41;
-    --secondary-color-dark: #dddddd;
+    --form-background-dark: #241b1b;
+    --input-background-dark: #5757577e;
+    --primary-color-dark: #518db3;
+    --secondary-color-dark: #979797;
+  }
+  /* Dropdown Styles */
+.settings-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--background-light);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: var(--text-light);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--input-background-light);
+}
+
+.dropdown-content.show {
+    display: block;
 }
 
 body {
@@ -57,6 +92,7 @@ body {
 .settings-wrapper {
     display: flex;
     align-items: center;
+
 }
 
 .theme-button, #theme-button {
@@ -81,7 +117,6 @@ body {
     flex: 1;
     margin-top: 70px; /* Adjust for fixed header */
     justify-content: center;
-    align-items: center;
     padding: 20px;
 }
 
@@ -224,9 +259,8 @@ button:hover {
     color: var(--text-light);
 }
 
-#create-post-form button {
-    padding: 0.5rem;
-    background-color: var(--primary-color-light);
+#create-post-form button.dark-mode {
+    background-color: var(--primary-color-dark);
     color: white;
     border: none;
     cursor: pointer;
@@ -278,8 +312,12 @@ body.dark-mode {
     background-color: var(--header-background-dark);
 }
 
-#theme-button:hover {
-    color: var(--secondary-color-light);
+#theme-button.darkmode{
+    color: var(--primary-color-dark);
+}
+
+#theme-button.darkmode:hover {
+    color: var(--secondary-color-dark);
 }
 
 .hero.dark-mode h2 {
@@ -295,7 +333,7 @@ body.dark-mode {
 }
 
 input.dark-mode, textarea.dark-mode {
-    background-color: var(--input-background-dark);
+    background-color: var(--secondary-color-dark);
     color: var(--text-dark);
 }
 
@@ -319,7 +357,32 @@ button.dark-mode:hover {
 #create-post-form.dark-mode button:hover {
     background-color: var(--secondary-color-dark);
 }
+ /* Dropdown Styles dark*/
+.dropdown-content.dark-mode {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--background-dark);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    border-radius: 5px;
+    overflow: hidden;
+}
 
+.dropdown-content.dark-mode a.dark-mode {
+    color: var(--text-dark);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content.dark-mode a.darkmode:hover {
+    background-color: var(--input-background-dark);
+}
+/*end drop*/
 .post.dark-mode {
     background-color: var(--form-background-dark);
 }
@@ -334,4 +397,7 @@ a.dark-mode {
 
 a.dark-mode:hover {
     text-decoration: underline;
+}
+h2.dark-mode{
+    color: var(--primary-color-dark);
 }

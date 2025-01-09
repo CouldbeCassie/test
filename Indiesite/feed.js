@@ -91,4 +91,6 @@ document.getElementById('create-post-form').addEventListener('submit', async (e)
     } else {
         alert('Failed to create post!');
     }
-});
+}); 
+
+const dropdownToggle = document.getElementById("dropdown-toggle"); const dropdownContent = document.getElementById("dropdown-content"); dropdownToggle.addEventListener("click", function() { dropdownContent.classList.toggle("show"); }); // Close the dropdown if the user clicks outside of it window.onclick = function(event) { if (!event.target.matches('#dropdown-toggle')) { if (dropdownContent.classList.contains('show')) { dropdownContent.classList.remove('show'); } } }

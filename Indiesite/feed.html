@@ -6,23 +6,34 @@
     <title>Piro Feed</title>
     <link rel="stylesheet" href="feed.css">
     <script defer src="feed.js"></script>
+    <script defer src="scripts.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header class="header">
         <div class="header-content">
-          <h1 class="logo">Piro Feed</h1>
-          <div class="settings-wrapper">
-            <button id="theme-button-feed" class="theme-button">
-              <span id="theme-icon-feed" class="fas fa-sun"></span>
-            </button>
-          </div>
+            <h1 class="logo">Piro Feed</h1>
+            <div class="settings-wrapper">
+                <button id="theme-button-feed" class="theme-button">
+                    <span id="theme-icon-feed" class="fas fa-sun"></span>
+                </button>
+                <div class="dropdown">
+                    <button id="dropdown-toggle" class="theme-button">
+                        <span class="fas fa-bars"></span>
+                    </button>
+                    <div id="dropdown-content" class="dropdown-content">
+                        <a href="feed.html">Home</a>
+                        <a href="#account">Account</a>
+                        <a href="#settings">Settings</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
     <main class="main">
         <div class="main-container">
             <section class="hero">
-                <h2>Welcome to Piro Feed!</h2>
+                <h2 id="welcome-message">Welcome to Piro Feed!</h2>
                 <p>Here's what's happening today...</p>
             </section>
             <!-- New Post Creation Form -->
