@@ -51,6 +51,22 @@
     display: block;
 }
 
+.like-button, .dislike-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.like-button i {
+    color: #007bff;
+}
+
+.dislike-button i {
+    color: #d9534f;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;

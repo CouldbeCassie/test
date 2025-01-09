@@ -3,61 +3,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user) {
         document.getElementById('username-display').textContent = user.username;
     } else {
-        // Redirect to login page or show login form
+        window.location.href = 'login.html'; // Redirect to login page if not logged in
     }
     loadPosts();
-    setupThemeToggle();
-});
 
-function setUser(user) {
-    localStorage.setItem('user', JSON.stringify(user));
-}
+    const createPostForm = document.getElementById('create-post-form');
+    if (createPostForm) {
+        createPostForm.addEventListener('submit', handlePostCreation);
+    }
+});
 
 function getUser() {
     return JSON.parse(localStorage.getItem('user'));
 }
 
-function logout() {
-    localStorage.removeItem('user');
-    location.reload(); // or redirect to the login page
+function getPosts() {
+    return JSON.parse(localStorage.getItem('posts')) || [];
 }
 
-document.getElementById('logout-button').addEventListener('click', logout);
-
-function setupThemeToggle() {
-    const themeButton = document.getElementById('theme-button-feed');
-    themeButton.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        if (document.body.classList.contains('dark-mode')) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            document.getElementById('theme-icon-feed').classList.replace('fa-sun', 'fa-moon');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            document.getElementById('theme-icon-feed').classList.replace('fa-moon', 'fa-sun');
-        }
-
-        // Apply dark mode classes to relevant elements
-        applyDarkModeClasses();
-    });
+function savePosts(posts) {
+    localStorage.setItem('posts', JSON.stringify(posts));
 }
 
-// Add dark mode classes to relevant elements
-function applyDarkModeClasses() {
-    const elements = document.querySelectorAll('.header, .hero h2, .hero p, #form-container, input, textarea, button, #create-post-form textarea, #create-post-form button, .post, p, a');
-    elements.forEach(element => {
-        if (document.body.classList.contains('dark-mode')) {
-            element.classList.add('dark-mode');
-        } else {
-            element.classList.remove('dark-mode');
-        }
-    });
-}
-
-// Load posts from the server
 async function loadPosts() {
     console.log("Loading posts...");
-    const response = await fetch('/posts');
-    const posts = await response.json();
+    let posts = getPosts(); // Fallback to localStorage posts
+    try {
+        const response = await fetch('/posts');
+        if (response.ok) {
+            posts = await response.json();
+            savePosts(posts); // Save fetched posts to localStorage
+        }
+    } catch (error) {
+        console.warn('Using fallback posts from localStorage:', error);
+    }
     console.log("Posts loaded:", posts);
 
     const postsContainer = document.getElementById('posts-container');
@@ -68,33 +47,81 @@ async function loadPosts() {
         postElement.classList.add('post');
         postElement.innerHTML = `
             <p><strong>${post.username}</strong>: ${post.content}</p>
-            <button class="like-button" data-id="${post.id}">Like</button>
+            <button class="like-button" data-id="${post.id}"><i class="fas fa-thumbs-up"></i></button>
             <span class="like-count">${post.likes}</span>
+            <button class="dislike-button" data-id="${post.id}"><i class="fas fa-thumbs-down"></i></button>
+            <span class="dislike-count">${post.dislikes || 0}</span>
         `;
         postsContainer.appendChild(postElement);
     });
 
     document.getElementById('posts-container').addEventListener('click', async (e) => {
-        if (e.target.classList.contains('like-button')) {
-            const postId = e.target.getAttribute('data-id');
-            const response = await fetch(`/posts/${postId}/like`, {
-                method: 'POST'
-            });
-
-            if (response.ok) {
-                await loadPosts();
-            } else {
-                alert('Failed to like post!');
-            }
+        const postId = e.target.closest('button').getAttribute('data-id');
+        if (e.target.closest('button').classList.contains('like-button')) {
+            console.log(`Liking post with ID: ${postId}`);
+            await handlePostLike(postId);
+        } else if (e.target.closest('button').classList.contains('dislike-button')) {
+            console.log(`Disliking post with ID: ${postId}`);
+            await handlePostDislike(postId);
         }
     });
-
-    // Apply dark mode classes to posts if in dark mode
-    applyDarkModeClasses();
 }
 
-// Handle post creation
-document.getElementById('create-post-form').addEventListener('submit', async (e) => {
+async function handlePostLike(postId) {
+    let success = false;
+    try {
+        const response = await fetch(`/posts/${postId}/like`, { method: 'POST' });
+        success = response.ok;
+    } catch (error) {
+        console.warn('Failed to like post on backend:', error);
+    }
+    if (success) {
+        await loadPosts();
+    } else {
+        likePost(postId); // Fallback to localStorage like
+    }
+}
+
+async function handlePostDislike(postId) {
+    let success = false;
+    try {
+        const response = await fetch(`/posts/${postId}/dislike`, { method: 'POST' });
+        success = response.ok;
+    } catch (error) {
+        console.warn('Failed to dislike post on backend:', error);
+    }
+    if (success) {
+        await loadPosts();
+    } else {
+        dislikePost(postId); // Fallback to localStorage dislike
+    }
+}
+
+function likePost(postId) {
+    const posts = getPosts();
+    const post = posts.find(p => p.id === postId);
+    if (post) {
+        post.likes += 1;
+        savePosts(posts);
+        loadPosts();
+    } else {
+        alert('Failed to like post!');
+    }
+}
+
+function dislikePost(postId) {
+    const posts = getPosts();
+    const post = posts.find(p => p.id === postId);
+    if (post) {
+        post.dislikes = (post.dislikes || 0) + 1;
+        savePosts(posts);
+        loadPosts();
+    } else {
+        alert('Failed to dislike post!');
+    }
+}
+
+async function handlePostCreation(e) {
     e.preventDefault();
     const content = document.getElementById('post-content').value;
     console.log("Creating post with content:", content);
@@ -105,27 +132,45 @@ document.getElementById('create-post-form').addEventListener('submit', async (e)
         return;
     }
 
-    const response = await fetch('/posts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, username: user.username })
-    });
+    let success = false;
+    try {
+        const response = await fetch('/posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content, username: user.username })
+        });
+        success = response.ok;
+    } catch (error) {
+        console.warn('Failed to create post on backend:', error);
+    }
 
-    if (response.ok) {
+    if (success) {
         console.log("Post created successfully");
         document.getElementById('post-content').value = '';
         loadPosts();
     } else {
-        alert('Failed to create post!');
+        // Fallback to localStorage post creation
+        const posts = getPosts();
+        const newPost = {
+            id: posts.length ? posts[posts.length - 1].id + 1 : 1,
+            username: user.username,
+            content,
+            likes: 0,
+            dislikes: 0
+        };
+        posts.push(newPost);
+        savePosts(posts);
+        document.getElementById('post-content').value = '';
+        loadPosts();
     }
-});
+}
 
+// Dropdown menu functionality
 const dropdownToggle = document.getElementById('dropdown-toggle');
 const dropdownContent = document.getElementById('dropdown-content');
 dropdownToggle.addEventListener('click', function() {
     dropdownContent.classList.toggle('show');
 });
-// Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
     if (!event.target.matches('#dropdown-toggle')) {
         if (dropdownContent.classList.contains('show')) {
