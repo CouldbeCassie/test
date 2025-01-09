@@ -26,6 +26,7 @@
                         <a href="feed.html">Home</a>
                         <a href="#account">Account</a>
                         <a href="#settings">Settings</a>
+                        <a id="logout-button" href="#">Logout</a>
                     </div>
                 </div>
             </div>
@@ -34,7 +35,7 @@
     <main class="main">
         <div class="main-container">
             <section class="hero">
-                <h2 id="welcome-message">Welcome to Piro Feed!</h2>
+                <h2>Welcome to Piro Feed! <span id="username-display"></span></h2>
                 <p>Here's what's happening today...</p>
             </section>
             <!-- New Post Creation Form -->
@@ -45,18 +46,7 @@
                 </form>
             </section>
             <section id="posts-container" class="posts-container">
-                <div class="post">
-                    <h3>Post Title 1</h3>
-                    <p>This is the content of the first post. It's great to have you here!</p>
-                </div>
-                <div class="post">
-                    <h3>Post Title 2</h3>
-                    <p>This is the content of the second post. Enjoy your stay at Piro Feed!</p>
-                </div>
-                <div class="post">
-                    <h3>Post Title 3</h3>
-                    <p>This is the content of the third post. Have a wonderful day!</p>
-                </div>
+                <!-- Posts will be dynamically loaded here -->
             </section>
         </div>
     </main>

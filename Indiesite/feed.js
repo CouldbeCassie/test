@@ -1,7 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const user = getUser();
+    if (user) {
+        document.getElementById('username-display').textContent = user.username;
+    } else {
+        // Redirect to login page or show login form
+    }
     loadPosts();
     setupThemeToggle();
 });
+
+function setUser(user) {
+    localStorage.setItem('user', JSON.stringify(user));
+}
+
+function getUser() {
+    return JSON.parse(localStorage.getItem('user'));
+}
+
+function logout() {
+    localStorage.removeItem('user');
+    location.reload(); // or redirect to the login page
+}
+
+document.getElementById('logout-button').addEventListener('click', logout);
 
 function setupThemeToggle() {
     const themeButton = document.getElementById('theme-button-feed');
@@ -46,7 +67,7 @@ async function loadPosts() {
         const postElement = document.createElement('div');
         postElement.classList.add('post');
         postElement.innerHTML = `
-            <p>${post.content}</p>
+            <p><strong>${post.username}</strong>: ${post.content}</p>
             <button class="like-button" data-id="${post.id}">Like</button>
             <span class="like-count">${post.likes}</span>
         `;
@@ -78,10 +99,16 @@ document.getElementById('create-post-form').addEventListener('submit', async (e)
     const content = document.getElementById('post-content').value;
     console.log("Creating post with content:", content);
 
+    const user = getUser();
+    if (!user) {
+        alert('You need to be logged in to create a post!');
+        return;
+    }
+
     const response = await fetch('/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content })
+        body: JSON.stringify({ content, username: user.username })
     });
 
     if (response.ok) {
@@ -91,6 +118,18 @@ document.getElementById('create-post-form').addEventListener('submit', async (e)
     } else {
         alert('Failed to create post!');
     }
-}); 
+});
 
-const dropdownToggle = document.getElementById("dropdown-toggle"); const dropdownContent = document.getElementById("dropdown-content"); dropdownToggle.addEventListener("click", function() { dropdownContent.classList.toggle("show"); }); // Close the dropdown if the user clicks outside of it window.onclick = function(event) { if (!event.target.matches('#dropdown-toggle')) { if (dropdownContent.classList.contains('show')) { dropdownContent.classList.remove('show'); } } }
+const dropdownToggle = document.getElementById('dropdown-toggle');
+const dropdownContent = document.getElementById('dropdown-content');
+dropdownToggle.addEventListener('click', function() {
+    dropdownContent.classList.toggle('show');
+});
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('#dropdown-toggle')) {
+        if (dropdownContent.classList.contains('show')) {
+            dropdownContent.classList.remove('show');
+        }
+    }
+};
