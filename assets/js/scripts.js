@@ -1,5 +1,6 @@
 const API_URL = 'https://www.tygym.se/EE24a_tygym/api/backend';
 
+
 document.addEventListener('DOMContentLoaded', () => {
     setupFormToggle();
     setupFormHandlers();
