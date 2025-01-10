@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// Path to your users file
 $usersFile = 'users.json';
 
-// Load users from file
 function loadUsers() {
     global $usersFile;
     if (file_exists($usersFile)) {
@@ -14,31 +14,30 @@ function loadUsers() {
     }
 }
 
-// Save users to file
 function saveUsers($users) {
     global $usersFile;
     file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT));
 }
 
-// Handle GET request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $users = loadUsers();
     echo json_encode($users);
-
-// Handle POST request for creating a new user
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $users = loadUsers();
 
-    // Generate a new ID
     $newId = count($users) ? end($users)['id'] + 1 : 1;
     $newUser = [
         'id' => $newId,
-        'username' => $data['username']
+        'username' => $data['username'],
+        'password' => $data['password']
     ];
 
     $users[] = $newUser;
     saveUsers($users);
     echo json_encode($newUser);
+} else {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
 ?>
