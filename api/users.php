@@ -19,23 +19,29 @@ function saveUsers($users) {
     file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT));
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+$method = $_SERVER['REQUEST_METHOD'];
+if ($method === 'GET') {
     $users = loadUsers();
     echo json_encode($users);
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+} elseif ($method === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $users = loadUsers();
+    if (isset($data['username']) && isset($data['password'])) {
+        $users = loadUsers();
 
-    $newId = count($users) ? end($users)['id'] + 1 : 1;
-    $newUser = [
-        'id' => $newId,
-        'username' => $data['username'],
-        'password' => $data['password']
-    ];
+        $newId = count($users) ? end($users)['id'] + 1 : 1;
+        $newUser = [
+            'id' => $newId,
+            'username' => $data['username'],
+            'password' => $data['password']
+        ];
 
-    $users[] = $newUser;
-    saveUsers($users);
-    echo json_encode($newUser);
+        $users[] = $newUser;
+        saveUsers($users);
+        echo json_encode($newUser);
+    } else {
+        http_response_code(400);
+        echo json_encode(['status' => 'error', 'message' => 'Invalid data format']);
+    }
 } else {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
