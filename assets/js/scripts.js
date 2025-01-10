@@ -46,6 +46,8 @@ async function handleRegister(e) {
 
     if (!validateInputs(username, password)) return;
 
+    console.log('Sending registration request:', { username, password });
+
     try {
         const response = await fetch(`${API_URL}/users/register`, {
             method: 'POST',
@@ -55,6 +57,9 @@ async function handleRegister(e) {
             },
             body: JSON.stringify({ username, password })
         });
+
+        console.log('Registration response status:', response.status);
+        console.log('Registration response headers:', response.headers);
 
         handleResponse(response, 'User registered!', 'User registration failed!');
     } catch (error) {
@@ -67,6 +72,8 @@ async function handleLogin(e) {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 
+    console.log('Sending login request:', { username, password });
+
     try {
         const response = await fetch(`${API_URL}/users/login`, {
             method: 'POST',
@@ -76,6 +83,9 @@ async function handleLogin(e) {
             },
             body: JSON.stringify({ username, password })
         });
+
+        console.log('Login response status:', response.status);
+        console.log('Login response headers:', response.headers);
 
         handleResponse(response, 'Login successful!', 'Login failed!', true);
     } catch (error) {
