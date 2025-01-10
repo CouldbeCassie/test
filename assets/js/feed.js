@@ -1,4 +1,4 @@
-const API_URL = 'https://cassaint.com/api';
+const API_URL = 'https://cassaint.com/api/posts.php';
 
 document.addEventListener('DOMContentLoaded', () => {
     const user = getUser();
