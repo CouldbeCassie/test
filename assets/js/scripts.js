@@ -1,4 +1,4 @@
-const API_URL = 'https://cassaint.com/api';
+const API_URL = 'https://cassaint.com/api/users.php';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Toggle forms
