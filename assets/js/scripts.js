@@ -1,6 +1,5 @@
 const API_URL = 'https://www.tygym.se/EE24a_tygym/api/backend';
 
-
 document.addEventListener('DOMContentLoaded', () => {
     setupFormToggle();
     setupFormHandlers();
@@ -50,7 +49,10 @@ async function handleRegister(e) {
     try {
         const response = await fetch(`${API_URL}/users/register`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-Custom-Header': 'custom-value' // Add a custom header to trigger preflight
+            },
             body: JSON.stringify({ username, password })
         });
 
@@ -68,7 +70,10 @@ async function handleLogin(e) {
     try {
         const response = await fetch(`${API_URL}/users/login`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-Custom-Header': 'custom-value' // Add a custom header to trigger preflight
+            },
             body: JSON.stringify({ username, password })
         });
 
