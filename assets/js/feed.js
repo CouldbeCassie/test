@@ -1,4 +1,4 @@
-const API_URL = 'https://cassaint.com/api/posts.php';
+const API_URL = 'https://www.tygym.se/EE24a_tygym/api/backend';
 
 document.addEventListener('DOMContentLoaded', () => {
     const user = getUser();
@@ -22,7 +22,7 @@ function getUser() {
 async function loadPosts() {
     console.log("Loading posts...");
     try {
-        const response = await fetch(`${API_URL}/posts.php`);
+        const response = await fetch(`${API_URL}/posts`);
         if (!response.ok) throw new Error('Failed to fetch posts');
         const posts = await response.json();
         console.log("Posts loaded:", posts);
@@ -36,9 +36,9 @@ async function loadPosts() {
             postElement.innerHTML = `
                 <p><strong>${post.username}</strong>: ${post.content}</p>
                 <p><small>${post.timestamp}</small></p>
-                <button class="like-button" data-id="${post.id}" data-action="like"><i class="fas fa-thumbs-up"></i></button>
+                <button class="like-button" data-id="${post._id}" data-action="like"><i class="fas fa-thumbs-up"></i></button>
                 <span class="like-count">${post.likes}</span>
-                <button class="dislike-button" data-id="${post.id}" data-action="dislike"><i class="fas fa-thumbs-down"></i></button>
+                <button class="dislike-button" data-id="${post._id}" data-action="dislike"><i class="fas fa-thumbs-down"></i></button>
                 <span class="dislike-count">${post.dislikes}</span>
             `;
             postsContainer.appendChild(postElement);
@@ -63,10 +63,10 @@ async function loadPosts() {
 
 async function handlePostAction(postId, action) {
     try {
-        const response = await fetch(`${API_URL}/posts.php`, {
+        const response = await fetch(`${API_URL}/posts/${postId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: postId, action })
+            body: JSON.stringify({ action })
         });
         if (response.ok) {
             await loadPosts();
@@ -91,7 +91,7 @@ async function handlePostCreation(e) {
     }
 
     try {
-        const response = await fetch(`${API_URL}/posts.php`, {
+        const response = await fetch(`${API_URL}/posts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ content, username: user.username })

@@ -1,63 +1,61 @@
-const API_URL = 'https://cassaint.com/api/users.php';
+const API_URL = 'https://www.tygym.se/EE24a_tygym/api/backend';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Toggle forms
+    setupFormToggle();
+    setupFormHandlers();
+});
+
+function setupFormToggle() {
     document.getElementById('show-signup').addEventListener('click', (e) => {
         e.preventDefault();
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('register-form').style.display = 'block';
+        toggleForms('register');
     });
 
     document.getElementById('show-login').addEventListener('click', (e) => {
         e.preventDefault();
+        toggleForms('login');
+    });
+}
+
+function toggleForms(formType) {
+    if (formType === 'register') {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('register-form').style.display = 'block';
+    } else {
         document.getElementById('register-form').style.display = 'none';
         document.getElementById('login-form').style.display = 'block';
-    });
+    }
+}
 
+function setupFormHandlers() {
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', handleRegister);
     }
-    
+
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
     }
-});
+}
 
 async function handleRegister(e) {
     e.preventDefault();
     const username = document.getElementById('register-username').value;
     const password = document.getElementById('register-password').value;
 
-    // Validation checks
-    if (username.length < 3 || username.length > 15) {
-        alert('Username must be between 3 and 15 characters.');
-        return;
-    }
-    if (password.length < 6 || password.length > 20) {
-        alert('Password must be between 6 and 20 characters.');
-        return;
-    }
+    if (!validateInputs(username, password)) return;
 
     try {
-        const response = await fetch(`${API_URL}/users.php`, {
+        const response = await fetch(`${API_URL}/users/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
         });
 
-        if (response.ok) {
-            const newUser = await response.json();
-            alert('User registered!');
-            setUser(newUser); // Store the user
-            window.location.href = 'feed.html';  // Redirect to the feed page
-        } else {
-            alert('User registration failed!');
-        }
+        handleResponse(response, 'User registered!', 'User registration failed!');
     } catch (error) {
-        console.error('Error registering user:', error);
-        alert('User registration failed!');
+        handleError(error, 'Error registering user');
     }
 }
 
@@ -67,28 +65,45 @@ async function handleLogin(e) {
     const password = document.getElementById('login-password').value;
 
     try {
-        const response = await fetch(`${API_URL}/users.php`, {
-            method: 'GET'
+        const response = await fetch(`${API_URL}/users/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
         });
 
-        if (response.ok) {
-            const users = await response.json();
-            const user = users.find(u => u.username === username && u.password === password);
-
-            if (user) {
-                alert('Login successful!');
-                setUser(user); // Store the user
-                window.location.href = 'feed.html';  // Redirect to the feed page
-            } else {
-                alert('Invalid username or password!');
-            }
-        } else {
-            alert('Login failed!');
-        }
+        handleResponse(response, 'Login successful!', 'Login failed!', true);
     } catch (error) {
-        console.error('Error logging in:', error);
-        alert('Login failed!');
+        handleError(error, 'Error logging in');
     }
+}
+
+function validateInputs(username, password) {
+    if (username.length < 3 || username.length > 15) {
+        alert('Username must be between 3 and 15 characters.');
+        return false;
+    }
+    if (password.length < 6 || password.length > 20) {
+        alert('Password must be between 6 and 20 characters.');
+        return false;
+    }
+    return true;
+}
+
+function handleResponse(response, successMessage, errorMessage, isLogin = false) {
+    response.json().then(data => {
+        if (response.ok) {
+            alert(successMessage);
+            setUser(data);
+            if (isLogin) window.location.href = 'feed.html';
+        } else {
+            alert(errorMessage);
+        }
+    });
+}
+
+function handleError(error, errorMessage) {
+    console.error(errorMessage, error);
+    alert(errorMessage);
 }
 
 const logoutButton = document.getElementById('logout-button');
