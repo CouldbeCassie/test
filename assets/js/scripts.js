@@ -1,4 +1,4 @@
-const API_URL = 'https://www.tygym.se/EE24a_tygym/api/backend';
+const API_URL = 'https://localhost:3000';
 
 document.addEventListener('DOMContentLoaded', () => {
     setupFormToggle();
